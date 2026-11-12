@@ -18,9 +18,9 @@ Open <http://127.0.0.1:4183>.
 
 [Suggest an edit to the guide](https://github.com/mugiwarafx/coga-cg-welcome/edit/main/index.html), or fork the repository and open a pull request against `main`. GitHub's editor can create a fork and pull request for contributors without write access.
 
-Keep the simple view easy to read, and update the detailed view when the same information appears in both. Preserve keyboard access, descriptive links and the light theme as the default. Check both views and themes on a narrow screen before submitting.
+Keep the simple view easy to read, and update the detailed view when the same information appears in both. Preserve keyboard access, descriptive links and the light theme. Check both views on a narrow screen before submitting.
 
-The guide stores theme and reading preferences in the visitor's browser. There are no accounts or analytics.
+The guide stores reading preferences in the visitor's browser. There are no accounts or analytics.
 
 ## Publish
 
