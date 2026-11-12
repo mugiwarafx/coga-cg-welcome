@@ -220,6 +220,7 @@ footer{margin-top:4rem; border-top:1px solid var(--rule); padding-top:1em; font-
   .band.alt{background:var(--s-band)}
   .hero{padding:2rem 0 4.5rem}
   .hero .inner{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:3rem 4rem; align-items:center}
+  .welcome-wave{display:block; width:40px; height:40px; margin-bottom:16px; font-size:36px; line-height:40px}
   .lede{font-size:1.35rem; line-height:1.5}
   .pill{display:inline-block; margin-top:.75rem; font:inherit; font-weight:700; color:var(--s-link); background:var(--s-bg); border:2px solid var(--s-link); border-radius:999px; padding:.7em 1.6em; text-decoration:none; cursor:pointer}
   .pill:hover{background:var(--s-link); color:var(--s-bg)}
@@ -229,6 +230,7 @@ footer{margin-top:4rem; border-top:1px solid var(--rule); padding-top:1em; font-
   .glance ol{list-style:none; margin:0; padding:0; display:grid; gap:.5rem}
   .glance a{display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:.55rem .9rem; border:1px solid; border-left-width:.5rem; border-radius:.4rem; text-decoration:none; color:var(--s-ink); font-weight:600; font-size:1rem}
   .glance a:hover{text-decoration:underline}
+  .glance .source-link{display:inline-block; margin-top:16px; padding:0; border:0; border-radius:0; color:var(--s-link); font-weight:400; text-decoration:underline}
   .glance small{font-weight:400; font-size:.85rem; white-space:nowrap}
   .glance .read{background:var(--note-bg); border-color:var(--note-border)}
   .glance .skim{background:var(--example-bg); border-color:var(--example-border)}
@@ -307,9 +309,9 @@ footer{margin-top:4rem; border-top:1px solid var(--rule); padding-top:1em; font-
     <section class="hero">
       <div class="inner">
         <div>
-          <h1 id="simple-title" tabindex="-1">New here? Start with this page.</h1>
-          <p class="lede">Our notes document is very long. You do not need to read it all.</p>
-          <p class="lede">This page shows you the few parts that matter first.</p>
+          <span class="welcome-wave" aria-hidden="true">👋</span>
+          <h1 id="simple-title" tabindex="-1">Welcome. We’re glad you’re here.</h1>
+          <p class="lede">This guide explains what the group does and helps you get started with us.</p>
           <a class="pill" href="#s-steps">See your first 3 steps</a>
         </div>
         <figure class="glance">
@@ -324,6 +326,7 @@ footer{margin-top:4rem; border-top:1px solid var(--rule); padding-top:1em; font-
             <li><a class="skim" href="#s-tab-25notes">'25 Meeting Notes <small>Later</small></a></li>
             <li><a class="arch" href="#s-tab-24">'24 and older notes <small>History</small></a></li>
           </ol>
+          <a class="source-link" href="https://docs.google.com/document/d/1VsHS-oQDR7XY87E91sd-zqYaq8DCH9Ppwf9YeqCNcks/edit">Open the full meeting notes (Google Docs)</a>
         </figure>
       </div>
     </section>
@@ -504,7 +507,7 @@ footer{margin-top:4rem; border-top:1px solid var(--rule); padding-top:1em; font-
         <p><strong>Help improve this guide.</strong> <a href="https://github.com/mugiwarafx/coga-cg-welcome/edit/main/index.html">Suggest a change on GitHub</a> and open a pull request.</p>
         <p><a href="https://github.com/mugiwarafx/coga-cg-welcome">View the source on GitHub</a></p>
       </div>
-      <p>Unofficial summary written by a community member on 12 November 2026. It is not a W3C publication and W3C does not endorse it. Source: COGA Community Meeting Notes (Google Doc).</p>
+      <p>Unofficial summary written by a community member on 12 November 2026. It is not a W3C publication and W3C does not endorse it. Source: <a href="https://docs.google.com/document/d/1VsHS-oQDR7XY87E91sd-zqYaq8DCH9Ppwf9YeqCNcks/edit">COGA Community Meeting Notes (Google Docs)</a>.</p>
     </div>
   </footer>
 </div>
@@ -519,7 +522,7 @@ footer{margin-top:4rem; border-top:1px solid var(--rule); padding-top:1em; font-
     <summary>More details about this document</summary>
     <dl>
       <dt>Source document:</dt>
-      <dd>COGA Community Meeting Notes (Google Doc, more than 20 tabs)</dd>
+      <dd><a href="https://docs.google.com/document/d/1VsHS-oQDR7XY87E91sd-zqYaq8DCH9Ppwf9YeqCNcks/edit">COGA Community Meeting Notes</a> (Google Docs, more than 20 tabs)</dd>
       <dt>Covers notes from:</dt>
       <dd>October 2021 to 12 November 2026</dd>
       <dt>Group:</dt>
@@ -872,7 +875,7 @@ footer{margin-top:4rem; border-top:1px solid var(--rule); padding-top:1em; font-
     <p><strong>Help improve this guide.</strong> <a href="https://github.com/mugiwarafx/coga-cg-welcome/edit/main/index.html">Suggest a change on GitHub</a> and open a pull request.</p>
     <p><a href="https://github.com/mugiwarafx/coga-cg-welcome">View the source on GitHub</a></p>
   </div>
-  <p>Unofficial community summary, 12 November 2026. Not endorsed by W3C. Source: COGA Community Meeting Notes (Google Doc).</p>
+  <p>Unofficial community summary, 12 November 2026. Not endorsed by W3C. Source: <a href="https://docs.google.com/document/d/1VsHS-oQDR7XY87E91sd-zqYaq8DCH9Ppwf9YeqCNcks/edit">COGA Community Meeting Notes (Google Docs)</a>.</p>
 </footer>
 </div>
 
