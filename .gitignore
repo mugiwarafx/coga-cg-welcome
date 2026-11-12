@@ -4,3 +4,6 @@ test-results/
 playwright-report/
 .env
 .env.*
+
+# Local design proposals
+proposals.html

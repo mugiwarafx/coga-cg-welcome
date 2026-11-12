@@ -18,9 +18,9 @@ Open <http://127.0.0.1:4183>.
 
 [Suggest an edit to the guide](https://github.com/mugiwarafx/coga-cg-welcome/edit/main/index.html), or fork the repository and open a pull request against `main`. GitHub's editor can create a fork and pull request for contributors without write access.
 
-Keep the simple view easy to read, and update the detailed view when the same information appears in both. Preserve keyboard access, descriptive links and the light theme. Check both views on a narrow screen before submitting.
+Keep the guide easy to read. Preserve keyboard access, descriptive links and the light theme. Check the page on a narrow screen before submitting.
 
-The guide stores reading preferences in the visitor's browser. There are no accounts or analytics.
+The guide works without JavaScript. There are no accounts or analytics.
 
 ## Publish
 
@@ -31,3 +31,5 @@ GitHub Pages serves the root of the `main` branch. Merging a pull request or pus
 The original guide summarizes the COGA Community Meeting Notes from October 2021 through 12 November 2026. The meeting notes remain the source of truth.
 
 This is a community summary, not a W3C publication. W3C does not endorse it.
+
+The community symbol comes from the [W3C Community and Business Groups logo](https://www.w3.org/community/wp-content/themes/StoryTeller/img/svg/cgbg-logo.svg). The favicon uses the same symbol.
