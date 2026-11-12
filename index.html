@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>COGA Community Newcomer Guide</title>
+<meta name="description" content="A friendly starting point for the COGA Community Group: first steps, meeting notes, useful words and a detailed guide.">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:title" content="COGA Community Newcomer Guide">
+<meta property="og:description" content="New here? Find your first steps and the parts of the COGA community notes that matter first.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mugiwarafx.github.io/coga-cg-welcome/">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://mugiwarafx.github.io/coga-cg-welcome/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Two designs of the same guide, switched at the end of each view.
+   Simple view: w3.org landing style (Noto Sans, bold dark headings, white and pale-grey bands, pill buttons, cards).
+   Detailed view: W3C technical-report frame, described below. */
+/* Layout idea: the W3C technical-report frame (side ribbon, fixed grey ToC, blue title block with a details list, numbered blue headings, note/issue/example boxes), with WAI-style "Summary" boxes and a w3.org-style pill button. Colour values follow W3C's TR base stylesheet. Unofficial: no W3C logo. */
+:root{
+  --text:#000000;
+  --bg:#ffffff;
+  --heading-text:#005a9c;
+  --ribbon-bg:#1a5e9a;
+  --ribbon-text:#ffffff;
+  --a-text:#034575;
+  --a-underline:#707070;
+  --a-hover-bg:rgba(191,191,191,.25);
+  --toc-bg:#f7f8f9;
+  --toc-shadow:rgba(0,0,0,.1);
+  --toc-heading:#526b7a;
+  --toc-underline:#3980b5;
+  --rule:#c0c0c0;
+  --muted:#555555;
+  --note-border:#52e052; --note-bg:#e9fbe9; --note-head:#115f11;
+  --issue-border:#e05252; --issue-bg:#fbe9e9; --issue-head:#831616;
+  --example-border:#e0cb52; --example-bg:#fcfaee; --example-head:#574b0f;
+  --box-border:#dddddd; --box-head-bg:#f2f2f2; --box-head-text:#003366;
+  --tag-arch-bg:#e6e6e6; --tag-arch-text:#444444;
+  color-scheme: light;
+}
+/* Light is the default. Dark is opt-in using the sun and moon switch. */
+:root[data-mode="dark"]{
+  --text:#e4e4e4; --bg:#181818; --heading-text:#8fc1f2; --ribbon-bg:#1a5e9a; --ribbon-text:#ffffff;
+  --a-text:#9cc9f5; --a-underline:#9a9a9a; --a-hover-bg:rgba(160,160,160,.2);
+  --toc-bg:#000000; --toc-shadow:rgba(0,0,0,.5); --toc-heading:#a3b6c2; --toc-underline:#6aa9dc;
+  --rule:#4a4f55; --muted:#b0b0b0;
+  --note-border:#2f9a2f; --note-bg:#122a14; --note-head:#8fe08f;
+  --issue-border:#b54040; --issue-bg:#301515; --issue-head:#f3a9a9;
+  --example-border:#a8962f; --example-bg:#2a260f; --example-head:#e8d98a;
+  --box-border:#3a4048; --box-head-bg:#272727; --box-head-text:#a9cdf0;
+  --tag-arch-bg:#2c3035; --tag-arch-text:#cfcfcf;
+  --s-bg:#181818; --s-band:#1f1f1f; --s-card:#1f1f1f;
+  --s-ink:#ececec; --s-muted:#b4b9c0; --s-link:#9cc9f5; --s-line:#3a4048;
+  color-scheme: dark;
+}
+
+/* Simple-view tokens */
+:root{
+  --s-bg:#ffffff; --s-band:#f8f8fb; --s-card:#ffffff;
+  --s-ink:#1a1a1a; --s-muted:#4a5058; --s-link:#005a9c; --s-line:#d5d9e0;
+}
+
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0; background:var(--s-bg); color:var(--s-ink); font-family:sans-serif}
+[hidden]{display:none !important}
+:focus-visible{outline:3px solid var(--toc-underline); outline-offset:2px}
+
+/* A single theme switch leaves the guide itself at the top of the page. */
+.theme-toggle{
+  position:absolute; top:24px; right:24px; z-index:5;
+  display:grid; grid-template-columns:1fr 1fr; place-items:center;
+  width:80px; height:48px; padding:4px; border:2px solid var(--s-line); border-radius:9999px;
+  background:var(--s-band); color:var(--s-muted); cursor:pointer;
+}
+.theme-toggle::before{
+  content:""; position:absolute; top:4px; left:4px; width:36px; height:36px;
+  border-radius:9999px; background:var(--s-link);
+  transition:transform 180ms cubic-bezier(.32,.72,0,1);
+}
+.theme-toggle svg{position:relative; width:24px; height:24px; fill:currentColor; pointer-events:none}
+.theme-toggle .sun{color:var(--s-bg)}
+.theme-toggle[aria-checked="true"]::before{transform:translateX(32px)}
+.theme-toggle[aria-checked="true"] .sun{color:var(--s-muted)}
+.theme-toggle[aria-checked="true"] .moon{color:var(--s-bg)}
+.theme-toggle:hover{border-color:var(--s-link)}
+.theme-toggle:active{transform:scale(.98)}
+.skip-link{
+  position:absolute; top:8px; left:8px; z-index:20; padding:8px 12px;
+  background:var(--s-bg); color:var(--s-link); border:2px solid currentColor;
+  transform:translateY(-200%); font:600 1rem/1.5 sans-serif;
+}
+.skip-link:focus{transform:translateY(0)}
+.contribute{margin-bottom:24px}
+.contribute a{color:var(--s-link); text-underline-offset:4px}
+.view-return{margin-top:48px}
+h1:focus,main:focus{outline:none}
+@media (prefers-reduced-motion: reduce){.theme-toggle::before{transition:none}}
+@media print{
+  .theme-toggle,.skip-link,.view-return,#s-more,#toc-toggle{display:none !important}
+}
+
+/* ===== Detailed view: W3C technical-report frame ===== */
+#doc-view{
+  box-sizing:content-box; margin:0 auto; max-width:50em; padding:1.6em 1.5em 3em 50px;
+  line-height:1.5; font-family:sans-serif; font-size:1rem;
+  color:var(--text); background:var(--bg);
+
+/* Side ribbon, as on TR documents */
+.ribbon{
+  position:fixed; top:0; left:0; z-index:3; width:26px; height:24em; max-height:100%;
+  background:var(--ribbon-bg); color:var(--ribbon-text);
+  writing-mode:vertical-rl; transform:rotate(180deg);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1rem; white-space:nowrap; letter-spacing:.01em;
+}
+
+h1,h2,h3{color:var(--heading-text); text-wrap:balance; line-height:1.2}
+h1{font-size:170%; font-weight:bold; margin:0}
+h2{font-size:140%; font-weight:normal; margin:3rem 0 1rem}
+h3{font-size:120%; font-weight:normal; margin:3rem 0 .75rem}
+h4{font-size:100%; font-weight:bold; margin:1.5rem 0 .5rem}
+.secno{margin-right:.6em; font-variant-numeric:tabular-nums}
+p{margin:1em 0}
+ul,ol{padding-left:2em; margin:1em 0}
+li{margin:.25em 0}
+section{scroll-margin-top:3.5rem}
+
+a[href]{color:var(--a-text); text-decoration:underline; text-decoration-color:var(--a-underline); text-decoration-skip-ink:none; text-underline-offset:2px}
+a[href]:hover,a[href]:focus{text-decoration-thickness:2px}
+a:focus-visible,button:focus-visible,summary:focus-visible,#toc:focus-visible{outline:3px solid var(--toc-underline); outline-offset:2px}
+
+/* Title block */
+.head h1{font-size:220%; padding-right:96px}
+.head .state{font-size:140%; color:var(--heading-text); margin:.1em 0 1.6em}
+.head summary{font-weight:bold; cursor:pointer; margin-bottom:1em}
+dl{margin:1em 0}
+dt{font-weight:bold; line-height:1.2; margin-top:.75em}
+dd{margin:0 0 .5em 2em}
+.head dd + dd{margin-top:-.4em}
+.head .legal{font-size:small}
+.head hr{border:0; border-top:1px solid var(--rule); margin:1.5em 0 0}
+
+/* Table of contents */
+#toc h2{margin-top:2rem}
+.toc,.toc ol{list-style:none; margin:0; padding:0}
+.toc > li{margin:1.1em 0 0; font-weight:bold}
+.toc > li > ol{font-weight:normal}
+.toc li{margin:0}
+.toc a{display:grid; grid-template-columns:3.4em 1fr; color:inherit; text-decoration:none; padding:.2em 0; border-bottom:3px solid transparent}
+.toc a:hover,.toc a:focus{background:var(--a-hover-bg); border-bottom-color:var(--toc-underline)}
+.toc .secno{margin:0}
+#toc-toggle{display:none}
+
+@media (min-width:62em){
+  &:not(.toc-inline){padding-left:25em}
+  &:not(.toc-inline) #toc{
+    position:fixed; top:0; bottom:0; left:0; width:22.5em; overflow:auto;
+    padding:0 1em 3em calc(1em + 26px);
+    background:var(--toc-bg); box-shadow:-.1em 0 .25em var(--toc-shadow) inset;
+  }
+  &:not(.toc-inline) #toc h2{
+    margin:.9rem 0 .6rem; font-size:1rem; font-weight:bold; letter-spacing:.02em;
+    text-transform:uppercase; color:var(--toc-heading);
+  }
+  #toc-toggle{
+    display:block; position:fixed; bottom:0; left:0; z-index:4;
+    width:3rem; height:2.4rem; border:1px solid var(--rule); border-left:0; border-bottom:0;
+    border-radius:0 1.2rem 0 0; background:var(--bg); color:var(--muted);
+    font:bold 1.2rem/1 sans-serif; cursor:pointer;
+  }
+  #toc-toggle:hover{background:var(--toc-bg); color:var(--text)}
+}
+
+/* TR note / issue / example boxes */
+.note,.issue,.example{padding:.5em 1em; border-left:.5em solid; margin:1em 0}
+.note > :first-child,.issue > :first-child,.example > :first-child{margin-top:0}
+.note > :last-child,.issue > :last-child,.example > :last-child{margin-bottom:0}
+.marker{font-weight:bold; text-transform:uppercase; font-size:.9em; letter-spacing:.03em; margin:0 0 .4em}
+.note{border-color:var(--note-border); background:var(--note-bg)} .note .marker{color:var(--note-head)}
+.issue{border-color:var(--issue-border); background:var(--issue-bg)} .issue .marker{color:var(--issue-head)}
+.example{border-color:var(--example-border); background:var(--example-bg)} .example .marker{color:var(--example-head)}
+
+/* WAI-style summary box */
+.box{border:1px solid var(--box-border); margin:1em 0}
+.box-h{background:var(--box-head-bg); color:var(--box-head-text); font-weight:bold; padding:.5em 1em; margin:0; border-bottom:1px solid var(--box-border)}
+.box-i{padding:.75em 1em}
+.box-i > :first-child{margin-top:0} .box-i > :last-child{margin-bottom:0}
+
+/* Reading guidance under each tab heading */
+.where{color:var(--muted); margin:.5em 0 1em}
+.where code{font-family:Menlo,Consolas,"DejaVu Sans Mono",monospace; font-size:.9em}
+.tag{display:inline-block; font-size:.78em; font-weight:bold; padding:.05em .5em; border-radius:2px; white-space:nowrap; text-transform:uppercase; letter-spacing:.03em}
+.tag.read{background:var(--note-bg); color:var(--note-head); border:1px solid var(--note-border)}
+.tag.skim{background:var(--example-bg); color:var(--example-head); border:1px solid var(--example-border)}
+.tag.arch{background:var(--tag-arch-bg); color:var(--tag-arch-text); border:1px solid var(--rule)}
+.toc .tag{font-size:.68em; margin-left:.4em; vertical-align:.1em}
+.where .tag{margin-right:.5em}
+
+/* w3.org-style pill button */
+.toolbar{display:flex; flex-wrap:wrap; gap:.75em 1em; align-items:center; margin:1em 0}
+.pill{font:bold 1rem/1.2 sans-serif; color:var(--a-text); background:var(--bg); border:2px solid var(--a-text); border-radius:999px; padding:.65em 1.5em; cursor:pointer}
+.pill:hover,.pill[aria-pressed="true"]{background:var(--a-text); color:var(--bg)}
+.legend{display:flex; flex-wrap:wrap; gap:.5em}
+
+/* Data tables */
+.tablewrap{overflow-x:auto; margin:1em 0}
+table.data{border-collapse:collapse; width:100%}
+table.data th,table.data td{padding:.5em 1em; text-align:left; vertical-align:top; border-top:1px solid var(--rule)}
+table.data thead th{border-top:0; border-bottom:2px solid var(--text)}
+table.data tbody{border-bottom:2px solid var(--text)}
+table.data td.num,table.data th[scope="row"]{white-space:nowrap; font-variant-numeric:tabular-nums}
+table.data th[scope="row"]{font-weight:bold}
+
+figure{margin:1.5em 0; text-align:center}
+.diagram{overflow-x:auto}
+.diagram svg{display:block; min-width:680px; width:100%; height:auto}
+.diagram text{font-family:sans-serif; fill:var(--text)}
+figcaption{font-style:italic; font-size:90%; margin-top:.5em}
+
+&.short .more{display:none}
+footer{margin-top:4rem; border-top:1px solid var(--rule); padding-top:1em; font-size:small; color:var(--muted)}
+}
+
+/* ===== Simple view: w3.org landing style ===== */
+#simple-view{
+  font-family:"Noto Sans",system-ui,-apple-system,"Segoe UI",sans-serif; font-size:1.125rem; line-height:1.6;
+  color:var(--s-ink); background:var(--s-bg);
+
+  .inner{max-width:72rem; margin:0 auto; padding:0 1.5rem}
+  h1,h2,h3,h4{line-height:1.2; text-wrap:balance; margin:0; font-weight:700}
+  h1{font-size:clamp(2rem,4.5vw,2.75rem); margin-bottom:1.25rem}
+  h2{font-size:clamp(1.6rem,3vw,2.1rem); margin-bottom:1rem}
+  h3{font-size:1.3rem; margin-bottom:.5rem}
+  h4{font-size:1.15rem; margin-bottom:.4rem}
+  p{margin:0 0 1rem; max-width:60ch}
+  p:last-child{margin-bottom:0}
+  a{color:var(--s-link); text-underline-offset:.2em}
+  a:hover{text-decoration-thickness:3px}
+  section[id],li[id]{scroll-margin-top:4rem}
+
+  .site{padding:1.75rem 0}
+  .site .inner{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem 2.5rem; padding-right:128px}
+  .wordmark{font-weight:700; font-size:1.35rem; line-height:1.2; margin:0; max-width:none}
+  .wordmark span{display:block; font-weight:400; font-size:.95rem; color:var(--s-muted); margin-top:.15rem}
+  .site ul{display:flex; flex-wrap:wrap; gap:.25rem 1.75rem; list-style:none; margin:0; padding:0}
+  .site a{display:inline-block; padding:.25rem 0; font-weight:700; color:var(--s-ink); text-decoration:none}
+  .site a:hover{text-decoration:underline; text-decoration-thickness:3px; text-decoration-color:var(--s-link)}
+
+  .band{padding:4rem 0}
+  .band.alt{background:var(--s-band)}
+  .hero{padding:2rem 0 4.5rem}
+  .hero .inner{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:3rem 4rem; align-items:center}
+  .lede{font-size:1.35rem; line-height:1.5}
+  .pill{display:inline-block; margin-top:.75rem; font:inherit; font-weight:700; color:var(--s-link); background:var(--s-bg); border:2px solid var(--s-link); border-radius:999px; padding:.7em 1.6em; text-decoration:none; cursor:pointer}
+  .pill:hover{background:var(--s-link); color:var(--s-bg)}
+
+  .glance{margin:0}
+  .glance figcaption{font-weight:700; margin-bottom:.75rem}
+  .glance ol{list-style:none; margin:0; padding:0; display:grid; gap:.5rem}
+  .glance a{display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:.55rem .9rem; border:1px solid; border-left-width:.5rem; border-radius:.4rem; text-decoration:none; color:var(--s-ink); font-weight:600; font-size:1rem}
+  .glance a:hover{text-decoration:underline}
+  .glance small{font-weight:400; font-size:.85rem; white-space:nowrap}
+  .glance .read{background:var(--note-bg); border-color:var(--note-border)}
+  .glance .skim{background:var(--example-bg); border-color:var(--example-border)}
+  .glance .arch{background:var(--tag-arch-bg); border-color:var(--rule)}
+
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(17rem,100%),1fr)); gap:1.5rem; list-style:none; margin:1.5rem 0 0; padding:0}
+  .cards.two{grid-template-columns:repeat(auto-fit,minmax(min(24rem,100%),1fr))}
+  .card{background:var(--s-card); border:1px solid var(--s-line); border-radius:.5rem; padding:1.5rem}
+  .card p{max-width:none}
+  .card.read{border-top:.4rem solid var(--note-border)}
+  .card.skim{border-top:.4rem solid var(--example-border)}
+  .card.arch{border-top:.4rem solid var(--rule)}
+  .group{margin-top:2.75rem}
+  .time{font-size:.95rem; color:var(--s-muted)}
+
+  .steps{counter-reset:step}
+  .steps .card{counter-increment:step}
+  .steps .card::before{content:counter(step); display:grid; place-items:center; width:2.5rem; height:2.5rem; border-radius:50%; background:var(--s-link); color:var(--s-bg); font-weight:700; font-size:1.25rem; margin-bottom:1rem}
+
+  .flow{display:flex; gap:3rem; list-style:none; margin:2.5rem 0 0; padding:0}
+  .flow li{position:relative; flex:1; background:var(--s-card); border:2px solid var(--s-link); border-radius:.5rem; padding:1rem 1.25rem}
+  .flow strong{display:block}
+  .flow li + li::before{content:"→"; position:absolute; left:-2.2rem; top:50%; transform:translateY(-50%); font-size:1.6rem; line-height:1; color:var(--s-muted)}
+
+  details{margin-top:.9rem}
+  summary{font-weight:700; color:var(--s-link); cursor:pointer}
+  details ul{margin:.6rem 0 0; padding-left:1.2rem}
+  details li{margin:.4rem 0}
+
+  .callout{margin-top:1rem; padding:.9rem 1.1rem; border-left:.5rem solid var(--issue-border); background:var(--issue-bg); border-radius:0 .4rem .4rem 0}
+  .callout strong{color:var(--issue-head)}
+  .goodtoknow{margin-top:2rem; padding:1rem 1.25rem; border-left:.5rem solid var(--note-border); background:var(--note-bg); border-radius:0 .4rem .4rem 0; max-width:60rem}
+  .goodtoknow p{max-width:none}
+  .goodtoknow strong{color:var(--note-head)}
+
+  .words{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(18rem,100%),1fr)); gap:1.5rem 3rem; margin:1.5rem 0 0}
+  .words dt{font-weight:700}
+  .words dd{margin:.15rem 0 0}
+
+  .foot{padding:2rem 0; border-top:1px solid var(--s-line); font-size:.95rem; color:var(--s-muted)}
+  .foot p{max-width:none}
+
+  @media (max-width:52rem){
+    .site .inner{display:block; padding-right:1.5rem}
+    .wordmark{padding-right:96px}
+    .site nav{margin-top:24px}
+    .hero .inner{grid-template-columns:1fr}
+    .band{padding:3rem 0}
+    .flow{flex-direction:column; gap:2.75rem}
+    .flow li + li::before{content:"↓"; left:50%; top:-2.2rem; transform:translateX(-50%)}
+  }
+}
+</style>
+<script>try{if(localStorage.getItem("coga-mode")==="dark"){document.documentElement.setAttribute("data-mode","dark");}}catch(e){}</script>
+</head>
+<body>
+<a class="skip-link" id="skip-link" href="#simple-main">Skip to content</a>
+<button class="theme-toggle" type="button" id="themeToggle" role="switch" aria-checked="false" aria-label="Dark mode" title="Switch to dark mode" hidden>
+  <svg class="sun" viewBox="0 0 256 256" aria-hidden="true"><path d="M128 72a56 56 0 1 0 0 112 56 56 0 0 0 0-112Zm0 96a40 40 0 1 1 0-80 40 40 0 0 1 0 80Zm-8-128V24a8 8 0 0 1 16 0v16a8 8 0 0 1-16 0Zm16 176v16a8 8 0 0 1-16 0v-16a8 8 0 0 1 16 0ZM40 136H24a8 8 0 0 1 0-16h16a8 8 0 0 1 0 16Zm200-8a8 8 0 0 1-8 8h-16a8 8 0 0 1 0-16h16a8 8 0 0 1 8 8ZM48.8 60.1a8 8 0 0 1 11.3-11.3l11.3 11.3a8 8 0 0 1-11.3 11.3Zm158.4 135.8a8 8 0 0 1-11.3 11.3l-11.3-11.3a8 8 0 0 1 11.3-11.3ZM71.4 184.6a8 8 0 0 1 0 11.3l-11.3 11.3a8 8 0 0 1-11.3-11.3l11.3-11.3a8 8 0 0 1 11.3 0ZM207.2 48.8a8 8 0 0 1 0 11.3l-11.3 11.3a8 8 0 0 1-11.3-11.3l11.3-11.3a8 8 0 0 1 11.3 0Z"/></svg>
+  <svg class="moon" viewBox="0 0 256 256" aria-hidden="true"><path d="M235.5 150.2a8 8 0 0 0-8-2 88.1 88.1 0 0 1-109.7-109.7 8 8 0 0 0-10-10 104 104 0 1 0 129.7 129.7 8 8 0 0 0-2-8ZM136 216A88 88 0 0 1 99.1 48.1a104.1 104.1 0 0 0 108.8 108.8A87.9 87.9 0 0 1 136 216Z"/></svg>
+</button>
+
+<div id="simple-view">
+  <header class="site">
+    <div class="inner">
+      <p class="wordmark">COGA Community Group<span>Newcomer guide</span></p>
+      <nav aria-label="On this page">
+        <ul>
+          <li><a href="#s-about">About the group</a></li>
+          <li><a href="#s-steps">First steps</a></li>
+          <li><a href="#s-tabs">The notes</a></li>
+          <li><a href="#s-now">Happening now</a></li>
+          <li><a href="#s-words">Words</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="simple-main" tabindex="-1">
+    <section class="hero">
+      <div class="inner">
+        <div>
+          <h1 id="simple-title" tabindex="-1">New here? Start with this page.</h1>
+          <p class="lede">Our notes document is very long. You do not need to read it all.</p>
+          <p class="lede">This page shows you the few parts that matter first.</p>
+          <a class="pill" href="#s-steps">See your first 3 steps</a>
+        </div>
+        <figure class="glance">
+          <figcaption>The document has 8 main tabs. Read the first 4.</figcaption>
+          <ol>
+            <li><a class="read" href="#s-tab-home">Home <small>Read first</small></a></li>
+            <li><a class="read" href="#s-tab-action">Action | review <small>Read first</small></a></li>
+            <li><a class="read" href="#s-tab-26notes">'26 Meeting Notes <small>Read first</small></a></li>
+            <li><a class="read" href="#s-tab-papers">'26 Opinion Papers <small>Read first</small></a></li>
+            <li><a class="skim" href="#s-tab-26feedback">'26 Feedback for the Task Force <small>Later</small></a></li>
+            <li><a class="skim" href="#s-tab-25feedback">'25 Feedback to the Task Force <small>Later</small></a></li>
+            <li><a class="skim" href="#s-tab-25notes">'25 Meeting Notes <small>Later</small></a></li>
+            <li><a class="arch" href="#s-tab-24">'24 and older notes <small>History</small></a></li>
+          </ol>
+        </figure>
+      </div>
+    </section>
+
+    <section class="band alt" id="s-about">
+      <div class="inner">
+        <h2>What is this group?</h2>
+        <ul class="cards">
+          <li class="card"><h3>Who we are</h3><p>An open, informal group of people who care about cognitive accessibility. Anyone can join. You do not need to be an expert.</p></li>
+          <li class="card"><h3>What we do</h3><p>We talk about what makes websites and apps hard to understand and use. We write it down and send it to the people who write the official guidance.</p></li>
+          <li class="card"><h3>How we meet</h3><p>On Zoom, on the first Thursday of each month at 15:00 UTC. Between meetings we chat on Discord.</p></li>
+        </ul>
+        <ol class="flow" aria-label="How your input reaches W3C">
+          <li><strong>You share</strong>An experience, an example or an idea.</li>
+          <li><strong>The team leads collect</strong>Kiki, Cat and Anya put the group's input together.</li>
+          <li><strong>The Task Force decides</strong>The W3C COGA Task Force writes the official guidance.</li>
+        </ol>
+        <div class="goodtoknow">
+          <p><strong>Good to know.</strong> Meetings are not recorded. If you share a personal story, you can ask for it to stay in the room.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="s-steps">
+      <div class="inner">
+        <h2>Your first 3 steps</h2>
+        <p>Do these in any week you like. There is no deadline.</p>
+        <ol class="cards steps">
+          <li class="card"><h3>Join the chat</h3><p>Join Discord and add the meeting to your calendar. The links are on the Home tab of the notes document.</p></li>
+          <li class="card"><h3>Read one meeting</h3><p>Open '26 Meeting Notes and read the newest meeting. That is enough to follow the next call.</p></li>
+          <li class="card"><h3>Share one thing</h3><p>Vote 👍 for a topic you care about. Or write a few lines about something online that was hard for you. Any format is fine.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="band alt" id="s-tabs">
+      <div class="inner">
+        <h2>The notes document, tab by tab</h2>
+        <p>Each card is one tab. The line at the top tells you what the tab is for. Open "More" only if you want detail.</p>
+
+        <div class="group">
+          <h3>Read these first</h3>
+          <ul class="cards two">
+            <li class="card read" id="s-tab-home">
+              <h4>Home</h4>
+              <p>Meeting time, Zoom link, Discord and shared folders.</p>
+              <p class="time">About 3 minutes</p>
+              <details><summary>More about Home</summary><ul>
+                <li>It links to the official guidance, called <a href="https://www.w3.org/TR/coga-usable/">Content Usable</a>.</li>
+                <li>It lists older documents the group wrote.</li>
+                <li>There is one meeting time now: 15:00 UTC.</li>
+              </ul></details>
+            </li>
+            <li class="card read" id="s-tab-action">
+              <h4>Action | review</h4>
+              <p>A draft from the Task Force about testing with users. The group is commenting on it now.</p>
+              <p class="time">About 10 minutes</p>
+              <details><summary>More about Action | review</summary><ul>
+                <li>Main idea: you cannot check cognitive accessibility with tools alone. You have to involve people.</li>
+                <li>The testing itself must be easy to take part in.</li>
+                <li>Frustration and needing help count as results.</li>
+              </ul></details>
+            </li>
+            <li class="card read" id="s-tab-26notes">
+              <h4>'26 Meeting Notes</h4>
+              <p>One page for each monthly meeting. The newest is at the top.</p>
+              <p class="time">Read the last 2 or 3</p>
+              <details><summary>More about '26 Meeting Notes</summary><ul>
+                <li>February: the Task Force published 4 research papers.</li>
+                <li>April: the group asked to describe needs, not diagnoses.</li>
+                <li>September: the Task Force used the group's feedback.</li>
+                <li>October: the user-testing draft arrived.</li>
+              </ul></details>
+            </li>
+            <li class="card read" id="s-tab-papers">
+              <h4>'26 Opinion Papers</h4>
+              <p>Short papers by members about problems the guidance misses. You can vote for them.</p>
+              <p class="time">Start with the Voting Area</p>
+              <details><summary>More about '26 Opinion Papers</summary><ul>
+                <li>Endless scrolling: 7 votes.</li>
+                <li>Readability formulas: 3 votes.</li>
+                <li>Visual hierarchy: 3 votes.</li>
+                <li>Drafts about AI are still open.</li>
+              </ul></details>
+            </li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <h3>Look at these later</h3>
+          <ul class="cards">
+            <li class="card skim" id="s-tab-26feedback">
+              <h4>'26 Feedback for the Task Force</h4>
+              <p>Where to add comments and personal stories about the Task Force's research papers.</p>
+              <details><summary>More about '26 Feedback</summary><ul>
+                <li>The first round has been sent.</li>
+                <li>You can still add more in a separate copy.</li>
+                <li>Tag Kiki, Cat or Anya so they see it.</li>
+              </ul></details>
+            </li>
+            <li class="card skim" id="s-tab-25feedback">
+              <h4>'25 Feedback to the Task Force</h4>
+              <p>A list of things missing from the official guidance. The group sent it in 2025.</p>
+              <details><summary>More about '25 Feedback</summary><ul>
+                <li>Top of the list: endless scrolling feeds.</li>
+                <li>Then: mixing text and images well.</li>
+                <li>Then: gestures on phones.</li>
+              </ul></details>
+            </li>
+            <li class="card skim" id="s-tab-25notes">
+              <h4>'25 Meeting Notes</h4>
+              <p>Notes from every meeting in 2025. Read them only if you are curious.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <h3>History</h3>
+          <ul class="cards">
+            <li class="card arch" id="s-tab-24">
+              <h4>'24 and older notes</h4>
+              <p>Notes from 2021 to 2024. You do not need them to take part. Search them if a topic comes up.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="s-now">
+      <div class="inner">
+        <h2>What is happening now</h2>
+        <p>This was true on 12 November 2026.</p>
+        <ul class="cards">
+          <li class="card">
+            <h3>Commenting on a draft</h3>
+            <p>The group is reading the Task Force draft about testing with users. You can add comments in the Action | review tab.</p>
+            <div class="callout"><p><strong>Check the date.</strong> The notes give two deadlines in October. Ask Kiki if comments are still welcome.</p></div>
+          </li>
+          <li class="card">
+            <h3>Voting on opinion papers</h3>
+            <p>Add a 👍 in the Voting Area next to topics you care about. The votes show the Task Force what matters to members.</p>
+          </li>
+          <li class="card">
+            <h3>What the Task Force is doing</h3>
+            <p>It is working on WCAG until the end of the year. After that it plans a refreshed version of Content Usable.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="band alt" id="s-words">
+      <div class="inner">
+        <h2>Words you will hear</h2>
+        <dl class="words">
+          <div><dt>COGA</dt><dd>Short for cognitive and learning disabilities accessibility.</dd></div>
+          <div><dt>Task Force</dt><dd>The official W3C group that writes the guidance.</dd></div>
+          <div><dt>Community Group</dt><dd>This group. Open to everyone.</dd></div>
+          <div><dt>Content Usable</dt><dd>The main guidance document on cognitive accessibility.</dd></div>
+          <div><dt>Opinion paper</dt><dd>A one-page text about one problem the guidance misses.</dd></div>
+          <div><dt>User story</dt><dd>Your own experience, in your own words.</dd></div>
+          <div><dt>AP</dt><dd>Action point. A task that one person agreed to do.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="band" id="s-more">
+      <div class="inner">
+        <h2>Want every detail?</h2>
+        <p>The detailed view has every meeting of 2026, a timeline and a longer word list. It looks like a W3C technical document.</p>
+        <button class="pill" type="button" id="openDoc">Open the detailed view</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="inner">
+      <div class="contribute">
+        <p><strong>Help improve this guide.</strong> <a href="https://github.com/mugiwarafx/coga-cg-welcome/edit/main/index.html">Suggest a change on GitHub</a> and open a pull request.</p>
+        <p><a href="https://github.com/mugiwarafx/coga-cg-welcome">View the source on GitHub</a></p>
+      </div>
+      <p>Unofficial summary written by a community member on 12 November 2026. It is not a W3C publication and W3C does not endorse it. Source: COGA Community Meeting Notes (Google Doc).</p>
+    </div>
+  </footer>
+</div>
+
+<div id="doc-view" hidden>
+<div class="ribbon" aria-hidden="true">COGA Community Guide</div>
+
+<div class="head">
+  <h1 id="doc-title" tabindex="-1">COGA Community Newcomer Guide</h1>
+  <p class="state">Community guide, <time datetime="2026-11-12">12 November 2026</time></p>
+  <details open>
+    <summary>More details about this document</summary>
+    <dl>
+      <dt>Source document:</dt>
+      <dd>COGA Community Meeting Notes (Google Doc, more than 20 tabs)</dd>
+      <dt>Covers notes from:</dt>
+      <dd>October 2021 to 12 November 2026</dd>
+      <dt>Group:</dt>
+      <dd>Cognitive Accessibility (COGA) Community Group</dd>
+      <dt>Meets:</dt>
+      <dd>First Thursday of the month, 15:00 UTC, on Zoom</dd>
+      <dt>Chat:</dt>
+      <dd>Discord (Slack is being phased out)</dd>
+      <dt>Team leads:</dt>
+      <dd>Kiki (co-chair)</dd>
+      <dd>Cat</dd>
+      <dd>Anya</dd>
+    </dl>
+  </details>
+  <hr>
+</div>
+
+<section id="abstract">
+  <h2>Abstract</h2>
+  <p>The group's meeting-notes document has grown to more than 20 tabs and about five years of notes. This guide is a map of it: what each tab is for, what is in it, and what a newcomer can safely skip.</p>
+</section>
+
+<section id="sotd">
+  <h2>Status of This Document</h2>
+  <p><em>This section describes the status of this guide at the time it was written.</em></p>
+  <p>This guide has no formal standing. The Google Doc is the source of truth. The guide summarizes topics only and leaves out personal stories shared in meetings, in line with the group's privacy rule.</p>
+  <div class="toolbar">
+    <button class="pill" id="shortToggle" type="button" aria-pressed="false">Show essentials only</button>
+    <div class="legend" aria-label="Legend">
+      <span class="tag read">Read first</span>
+      <span class="tag skim">Skim when needed</span>
+      <span class="tag arch">Archive</span>
+    </div>
+  </div>
+</section>
+
+<nav id="toc" aria-labelledby="toc-h">
+  <h2 id="toc-h">Table of Contents</h2>
+  <ol class="toc">
+    <li><a href="#abstract"><span class="secno"></span><span>Abstract</span></a></li>
+    <li><a href="#sotd"><span class="secno"></span><span>Status of This Document</span></a></li>
+    <li><a href="#flow"><span class="secno">1.</span><span>How the group works</span></a></li>
+    <li><a href="#tabs"><span class="secno">2.</span><span>The tabs, one by one</span></a>
+      <ol>
+        <li><a href="#tab-home"><span class="secno">2.1</span><span>Home <span class="tag read">Read</span></span></a></li>
+        <li><a href="#tab-action"><span class="secno">2.2</span><span>Action | review <span class="tag read">Read</span></span></a></li>
+        <li><a href="#tab-26notes"><span class="secno">2.3</span><span>'26 Meeting Notes <span class="tag read">Read</span></span></a></li>
+        <li><a href="#tab-papers"><span class="secno">2.4</span><span>'26 Opinion Papers <span class="tag read">Read</span></span></a></li>
+        <li><a href="#tab-26feedback"><span class="secno">2.5</span><span>'26 Feedback/Material for the Task Force <span class="tag skim">Skim</span></span></a></li>
+        <li><a href="#tab-25feedback"><span class="secno">2.6</span><span>'25 Feedback to the Task Force <span class="tag skim">Skim</span></span></a></li>
+        <li><a href="#tab-25notes"><span class="secno">2.7</span><span>'25 Meeting Notes <span class="tag skim">Skim</span></span></a></li>
+        <li><a href="#tab-24"><span class="secno">2.8</span><span>'24 and older Meeting Notes <span class="tag arch">Archive</span></span></a></li>
+      </ol>
+    </li>
+    <li><a href="#timeline"><span class="secno">3.</span><span>Timeline</span></a></li>
+    <li><a href="#glossary"><span class="secno">4.</span><span>Glossary</span></a></li>
+    <li><a href="#first-month"><span class="secno">5.</span><span>Your first month</span></a></li>
+  </ol>
+</nav>
+<button id="toc-toggle" type="button" aria-label="Collapse sidebar" aria-expanded="true">←</button>
+
+<main id="doc-main" tabindex="-1">
+<section id="flow">
+  <h2><span class="secno">1.</span>How the group works</h2>
+  <p>The Community Group is the informal side of COGA. Anyone can join and bring lived experience, research or frustrations. The team leads turn that into structured feedback for the W3C COGA Task Force, which writes the official guidance.</p>
+  <figure>
+    <div class="diagram">
+      <svg viewBox="0 0 900 300" role="img" aria-labelledby="flowTitle flowDesc">
+        <title id="flowTitle">From members to W3C guidance</title>
+        <desc id="flowDesc">Members share experiences and research in monthly meetings and on Discord. These become four kinds of output: gaps lists, user stories, comments on drafts, and opinion papers, which members vote on. The team leads synthesize them and send them to the COGA Task Force, which updates Content Usable, the Research Modules and input to WCAG 3.</desc>
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--a-underline)"/></marker>
+        </defs>
+        <rect x="10" y="100" width="170" height="100" fill="var(--toc-bg)" stroke="var(--heading-text)" stroke-width="2"/>
+        <text x="95" y="135" text-anchor="middle" font-weight="700">Members</text>
+        <text x="95" y="160" text-anchor="middle" font-size="14">lived experience,</text>
+        <text x="95" y="178" text-anchor="middle" font-size="14">research, examples</text>
+        <g font-size="14">
+          <rect x="250" y="20" width="230" height="52" fill="var(--bg)" stroke="var(--rule)" stroke-width="2"/>
+          <text x="365" y="51" text-anchor="middle">Gaps lists (what is missing)</text>
+          <rect x="250" y="88" width="230" height="52" fill="var(--bg)" stroke="var(--rule)" stroke-width="2"/>
+          <text x="365" y="119" text-anchor="middle">User stories</text>
+          <rect x="250" y="156" width="230" height="52" fill="var(--bg)" stroke="var(--rule)" stroke-width="2"/>
+          <text x="365" y="187" text-anchor="middle">Comments on Task Force drafts</text>
+          <rect x="250" y="224" width="230" height="52" fill="var(--bg)" stroke="var(--rule)" stroke-width="2"/>
+          <text x="365" y="255" text-anchor="middle">Opinion papers and votes</text>
+        </g>
+        <rect x="540" y="110" width="150" height="80" fill="var(--bg)" stroke="var(--heading-text)" stroke-width="2"/>
+        <text x="615" y="145" text-anchor="middle" font-weight="700">Team leads</text>
+        <text x="615" y="168" text-anchor="middle" font-size="14">synthesize</text>
+        <rect x="740" y="80" width="150" height="140" fill="var(--ribbon-bg)"/>
+        <text x="815" y="112" text-anchor="middle" font-weight="700" style="fill:var(--ribbon-text)">COGA Task Force</text>
+        <text x="815" y="142" text-anchor="middle" font-size="13" style="fill:var(--ribbon-text)">Content Usable</text>
+        <text x="815" y="164" text-anchor="middle" font-size="13" style="fill:var(--ribbon-text)">Research Modules</text>
+        <text x="815" y="186" text-anchor="middle" font-size="13" style="fill:var(--ribbon-text)">WCAG 3 input</text>
+        <g stroke="var(--a-underline)" stroke-width="2" fill="none" marker-end="url(#arr)">
+          <path d="M180,150 C215,150 215,46 248,46"/>
+          <path d="M180,150 C215,150 215,114 248,114"/>
+          <path d="M180,150 C215,150 215,182 248,182"/>
+          <path d="M180,150 C215,150 215,250 248,250"/>
+          <path d="M480,46 C515,46 510,150 538,150"/>
+          <path d="M480,114 C510,114 510,150 538,150"/>
+          <path d="M480,182 C510,182 510,150 538,150"/>
+          <path d="M480,250 C515,250 510,150 538,150"/>
+          <path d="M690,150 L738,150"/>
+        </g>
+      </svg>
+    </div>
+    <figcaption>Figure 1. How member input reaches the W3C COGA Task Force.</figcaption>
+  </figure>
+  <div class="note more">
+    <p class="marker">Note</p>
+    <p>Ground rules: everyone gets a chance to speak. If you share a personal story, say at the start if it must stay in the room. Meetings are not recorded. The transcript and chat are used only to write the notes.</p>
+  </div>
+  <div class="note more">
+    <p class="marker">Note</p>
+    <p>Why a Community Group? It lets people think about possible standards without the strict demands and time commitments of a formal standards body. The group "constructively complains" to the Task Force.</p>
+  </div>
+</section>
+
+<section id="tabs">
+  <h2><span class="secno">2.</span>The tabs, one by one</h2>
+  <p>Open the tab list in the Google Doc with the menu icon at the top left. The sections below follow the same order.</p>
+
+  <section id="tab-home">
+    <h3><span class="secno">2.1</span>Home</h3>
+    <p class="where"><span class="tag read">Read first</span> About 3 minutes. Tab: <code>COGA Community Meeting Notes</code></p>
+    <div class="box"><p class="box-h">Summary</p><div class="box-i"><p>The practical info. Meeting time, Zoom link, calendar invite, Discord, the shared Drive folder and the resource-links spreadsheet.</p></div></div>
+    <ul class="more">
+      <li>Links to the official guidance: <a href="https://www.w3.org/TR/coga-usable/">Making Content Usable for People with Cognitive and Learning Disabilities</a> ("Content Usable"). It is not prescriptive, unlike WCAG.</li>
+      <li>A table of older community documents: Dark Patterns (early draft, March 2024), Fear and Cognitive Accessibility (Simo, September 2023), COGA Usability Feedback (April 2023), the Experience Sharing Form, and more.</li>
+      <li>The APAC-friendly 03:00 UTC meeting was cancelled in May 2026 for lack of attendance. Only the 15:00 UTC meeting remains.</li>
+    </ul>
+  </section>
+
+  <section id="tab-action">
+    <h3><span class="secno">2.2</span>Action | review by 18 Oct '26</h3>
+    <p class="where"><span class="tag read">Read first</span> Current work, about 10 minutes. Tab: <code>Action | review by 18 Oct '26</code>, sub-tab <code>Separate comments</code></p>
+    <div class="box"><p class="box-h">Summary</p><div class="box-i"><p>An early Task Force draft, <cite>User Testing for Cognitive Accessibility: Challenges, Principles, and Practical Solutions for Teams of Every Size</cite>, pasted in for the group to comment on. This is the group's main task right now.</p></div></div>
+    <div class="issue">
+      <p class="marker">Issue 1: deadline unclear</p>
+      <p>The tab title says 18 October, the October meeting notes say 21 October, and the draft was still on the 12 November agenda. Ask Kiki whether comments are still useful. Add comments directly in the draft or at the bottom of the tab.</p>
+    </div>
+    <div class="more">
+      <h4>What the draft argues</h4>
+      <ul>
+        <li>Automated testing can't tell if people with cognitive disabilities can actually use something. You have to involve them.</li>
+        <li>The testing process itself must be accessible: recruitment, consent, scheduling, the testing platform.</li>
+        <li>Record frustration, needed help and independence as data, not only task completion.</li>
+        <li>Move from "testing users" to "involving users", using the Easy Reading peer-researcher model.</li>
+      </ul>
+      <h4>How the draft is structured</h4>
+      <ol>
+        <li>Introduction and current practice</li>
+        <li>Challenges for users: being left out, consent online, distress</li>
+        <li>Challenges for developers: cost, diversity, tooling</li>
+        <li>Problems with current online tools</li>
+        <li>Principles ("do no harm", "test behaviour, not opinions")</li>
+        <li>Solutions for user needs</li>
+        <li>Solutions for developers and a proposal for AG</li>
+        <li>Closing note, then references</li>
+      </ol>
+      <h4>What the community has said so far</h4>
+      <ul>
+        <li>Anya: restructure around the testing process, cite every claim, show clearly what is different (the "delta") for cognitive disabilities, and explain how it relates to the testing section already in Content Usable.</li>
+        <li>A member suggested covering manipulative patterns and testing of AI chatbots, where risks of addiction and parasocial relationships are higher.</li>
+        <li>Kiki (comment of 9 November): resources are scattered through the draft and should sit with the related content.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="tab-26notes">
+    <h3><span class="secno">2.3</span>'26 Meeting Notes</h3>
+    <p class="where"><span class="tag read">Read first</span> The last two or three months are enough. Tab: <code>'26 Meeting Notes</code>, one sub-tab per meeting plus <code>How to &amp; Template</code></p>
+    <div class="box"><p class="box-h">Summary</p><div class="box-i"><p>One sub-tab per monthly meeting, newest at the top. Each has an agenda, attendees, decisions, action points (APs) and shared links.</p></div></div>
+    <div class="tablewrap more">
+      <table class="data">
+        <thead><tr><th scope="col">Meeting</th><th scope="col">Main topics</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">8 Jan</th><td>Julie is the new Task Force co-chair (Rain moves on). AI research tools (Elicit, NotebookLM).</td></tr>
+          <tr><th scope="row">5 and 12 Feb</th><td>Opinion paper drafts: Readability (Eric), Endless scrolling (Kiki). The Task Force publishes 4 new Research Modules. New Canadian ICT accessibility standard includes cognitive accessibility.</td></tr>
+          <tr><th scope="row">5 Mar</th><td>Plan for feedback on the Research Modules. Priority: real user stories, written however you like.</td></tr>
+          <tr><th scope="row">2 Apr</th><td>Feedback session: frame audiences by <strong>functional needs</strong> rather than diagnoses (in line with WCAG 3). Ask for citations. Voice-system user stories.</td></tr>
+          <tr><th scope="row">7 May</th><td>Feedback delivered to the Task Force. APAC meeting cancelled. Jordi presents logic contracts to verify AI-generated interfaces.</td></tr>
+          <tr><th scope="row">4 Jun</th><td>New async feedback doc. "Plus-one" voting on opinion papers. Deep dive on social media: endless scroll, autoplay, clickbait, AI bias when disclosing disability.</td></tr>
+          <tr><th scope="row">2 Jul</th><td>Voting area for opinion papers opens.</td></tr>
+          <tr><th scope="row">6 Aug</th><td>How to get big topics (AI and cognition, endless scroll) to the Task Force when they don't fit WCAG criteria. User stories work better than abstract papers. Profile-slide template.</td></tr>
+          <tr><th scope="row">3 Sep</th><td>Move away from auto-transcribed Zoom for privacy. The Task Force adopted the group's feedback: temporary impairments and environmental factors added. Maya's thesis on ADHD accommodations. TPAC 2026 in Dublin.</td></tr>
+          <tr><th scope="row">1 Oct</th><td>Review request for the user-testing draft. The Task Force focuses on WCAG until year end, then a refreshed Content Usable. Fatou's research on search-interface barriers. Cat steps back from the social media sub-group.</td></tr>
+          <tr><th scope="row">12 Nov</th><td>User-testing draft review. Intro slides postponed.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note more">
+      <p class="marker">Note</p>
+      <p>The <code>How to &amp; Template</code> sub-tab explains how the leads write notes: Zoom transcript, then a NotebookLM template, then a human check, and finally the transcript is deleted.</p>
+    </div>
+  </section>
+
+  <section id="tab-papers">
+    <h3><span class="secno">2.4</span>'26 Opinion Papers</h3>
+    <p class="where"><span class="tag read">Read first</span> Start with the Voting Area. Tab: <code>'26 Opinion Papers</code>, with <code>Voting Area</code>, one sub-tab per paper, the template, <code>Idea Generation</code> and <code>Prioritized list</code></p>
+    <div class="box"><p class="box-h">Summary</p><div class="box-i"><p>Opinion papers are 1 to 2 page pieces (500 to 750 words) on one gap that WCAG and Content Usable don't cover: the problem, then what research says, then a real story. Members add a 👍 to show which topics matter. The votes help the Task Force prioritize.</p></div></div>
+    <div class="tablewrap">
+      <table class="data">
+        <thead><tr><th scope="col">Finished paper</th><th scope="col">Votes</th><th scope="col">Author</th><th scope="col" class="more">Argument</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Endless scrolling [Mobile]</th><td class="num">7</td><td>Kiki</td><td class="more">Endless feeds remove signposts and stopping points, which disorients people and takes away their agency. Proposes intentional friction: breaks, "load more", time and progress indicators, alerts for content already seen.</td></tr>
+          <tr><th scope="row">Readability formulas</th><td class="num">3</td><td>Eric</td><td class="more">Formulas like Flesch-Kincaid can measure text but shouldn't be used to write it. Writing to the formula produces "caveman speak". Asks for a warning in Understanding SC 3.1.5 and Techniques G86 and G153.</td></tr>
+          <tr><th scope="row">Visual hierarchy (Gestalt)</th><td class="num">3</td><td>Simo</td><td class="more">Proximity, similarity and common container should be testable. Items in a group should sit closer together than separate groups (the radio-button example). The same style shouldn't be used for opposite actions.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="more">
+      <h4>Drafts and ideas still open</h4>
+      <ul>
+        <li><strong>AI Content Disclosure</strong> (draft): undisclosed AI content forces people to check facts themselves, which taxes working memory, executive function and literacy. Cites the EU AI Act, Article 50.</li>
+        <li><strong>System Utility &amp; Cognitive Agency</strong> (draft, AI-generated): extend COGA from usability to whether a system serves the user's real goals.</li>
+        <li><strong>Impact of GenAI chats on cognition</strong> (draft, votes: 1 for, 2 against): the illusion of learning, echo chambers, loss of agency.</li>
+        <li><strong>Not ready yet:</strong> COGA tips for users, Content alternatives (Anya). <strong>To be decided:</strong> Legibility.</li>
+        <li><strong>Idea Generation</strong> and <strong>Prioritized list</strong>: where topics started (December 2025, first drafts due 5 February 2026).</li>
+      </ul>
+    </div>
+    <div class="example">
+      <p class="marker">Example 1: writing your own</p>
+      <p>Copy the <code>[Copy me] Opinion Paper Template</code> sub-tab and follow its three parts.</p>
+    </div>
+  </section>
+
+  <section id="tab-26feedback">
+    <h3><span class="secno">2.5</span>'26 Feedback/Material for COGA Task Force</h3>
+    <p class="where"><span class="tag skim">Skim when needed</span> About 2 minutes.</p>
+    <div class="box"><p class="box-h">Summary</p><div class="box-i"><p>A pointer page. The first round of Research Modules feedback and user stories has been sent and is closed for edits. There is a separate copy where you can keep adding comments and user stories (one new sub-tab per story).</p></div></div>
+    <ul class="more">
+      <li>The 4 Research Modules reviewed: Voice Systems and Conversational Interfaces, Indoor Navigation, Online Safety and Wellbeing, Supported Decision-Making Online.</li>
+      <li>Tag Kiki, Cat or Anya when you add something so it goes into the next batch.</li>
+    </ul>
+  </section>
+
+  <section id="tab-25feedback">
+    <h3><span class="secno">2.6</span>'25 Feedback to COGA Task Force</h3>
+    <p class="where"><span class="tag skim">Skim when needed</span> The summary is enough. Sub-tabs: <code>Gaps in COGA 'Content Usable' Guidelines</code>, <code>Good multimodal content examples</code>, <code>Notes, Questions</code>, <code>Style Considerations</code></p>
+    <div class="box"><p class="box-h">Summary</p><div class="box-i"><p>The group's biggest piece of work so far. A ranked list of what Content Usable is missing, presented to Lisa and Rain from the Task Force in February 2025. Many 2026 opinion papers grew out of it.</p></div></div>
+    <div class="tablewrap">
+      <table class="data">
+        <thead><tr><th scope="col">Rank</th><th scope="col">Gap</th><th scope="col" class="more">The ask</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td>Endless scroll and video feeds</td><td class="more">Time and progress indicators, prompts to take breaks</td></tr>
+          <tr><td class="num">2</td><td>Multimodal communication</td><td class="more">Make pattern 8.2 easier to read. Account for people who hide images and alt text.</td></tr>
+          <tr><td class="num">3</td><td>Gestures (mobile) and intentional friction</td><td class="more">Clear affordances, a non-gesture alternative, friction before destructive actions</td></tr>
+          <tr><td class="num">4</td><td>Comparisons, AI and automation</td><td class="more">Side-by-side views and the same units. AI may reduce load but must not decide for the user.</td></tr>
+          <tr><td class="num">5</td><td>Responsive layout</td><td class="more">Information must not disappear in small windows</td></tr>
+          <tr><td class="num">6</td><td>Simple, linear structure</td><td class="more">More information architecture, less dispersion</td></tr>
+          <tr><td class="num">7</td><td>Emojis</td><td class="more">Clarify pattern 4.4.12. Don't use emojis instead of text.</td></tr>
+          <tr><td class="num">8</td><td>Metadata</td><td class="more">Author, date and context, so people can judge whether to trust content</td></tr>
+          <tr><td class="num">9</td><td>Data visualizations</td><td class="more">Which chart types are hard and why</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="more">
+      <p>Other items: deceptive-pattern protection (no hidden costs, no manipulative language, no forced actions), pre-selected options, onboarding, icons, tricky components, trade-offs.</p>
+      <h4>Good multimodal content examples</h4>
+      <p>A collection of good and bad examples, from blog posts with images grouped by topic to Netflix autoplay as a bad case.</p>
+      <h4>Style Considerations</h4>
+      <p>Comments on the Content Usable redesign: wording ("use", "identify", "content"), sentence case, one glossary, unique identifiers for each guideline.</p>
+    </div>
+  </section>
+
+  <section id="tab-25notes">
+    <h3><span class="secno">2.7</span>'25 Meeting Notes</h3>
+    <p class="where"><span class="tag skim">Skim when needed</span> Only if you are curious.</p>
+    <div class="box"><p class="box-h">Summary</p><div class="box-i"><p>The year the group shifted from long documents to a clear feedback process with the Task Force.</p></div></div>
+    <ul class="more">
+      <li><strong>January and February:</strong> special meeting to rank the gaps, then the Task Force joins in February. Lisa asks for quantitative signals, which led to today's voting.</li>
+      <li><strong>March and April:</strong> AI and machine learning for building interfaces. Brainstorm on meeting times.</li>
+      <li><strong>May and June:</strong> second meeting in an APAC time slot, move from Slack to Discord, shared calendar, audio versions of the notes made with NotebookLM.</li>
+      <li><strong>July and August:</strong> long conversations on how members use AI tools and how to prompt for accessible answers.</li>
+      <li><strong>September to December:</strong> intro round for new members, and the opinion-paper format starts (small scope instead of big documents like Dark Patterns). The social media sub-group lowers the bar for joining.</li>
+    </ul>
+  </section>
+
+  <section id="tab-24">
+    <h3><span class="secno">2.8</span>'24 and older Meeting Notes</h3>
+    <p class="where"><span class="tag arch">Archive</span> October 2021 to December 2024.</p>
+    <div class="box"><p class="box-h">Summary</p><div class="box-i"><p>The group's history. You don't need it to take part. Search it (Ctrl or Cmd + F) if a topic comes up.</p></div></div>
+    <ul class="more">
+      <li><strong>2021 to 2022:</strong> Rain (Task Force) runs the early meetings. Code of conduct, meeting-time polls, live transcription, a literature review on mental health, the Task Force user survey.</li>
+      <li><strong>2022 to 2023:</strong> Kiki and Adi become co-chairs. The Experience Sharing Form (with GDPR questions). "Fear and Cognitive Accessibility" (trauma).</li>
+      <li><strong>2023 to 2024:</strong> feedback on the Content Usable redesign prototype, the Finnish cognitive accessibility evaluation criteria (Simo's translation), the Dark Patterns document, the social media sub-group and the Medium account idea.</li>
+    </ul>
+  </section>
+</section>
+
+<section id="timeline">
+  <h2><span class="secno">3.</span>Timeline</h2>
+  <div class="tablewrap">
+    <table class="data">
+      <thead><tr><th scope="col">When</th><th scope="col">What happened</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Oct 2021</th><td>Notes start. Meetings led by the Task Force.</td></tr>
+        <tr><th scope="row">2022 to 2023</th><td>Community co-chairs. Experience Sharing Form.</td></tr>
+        <tr><th scope="row">2024</th><td>Dark Patterns document. Social media sub-group.</td></tr>
+        <tr><th scope="row">Feb 2025</th><td>Gaps in Content Usable presented to the Task Force.</td></tr>
+        <tr><th scope="row">May 2025</th><td>Discord, two time zones.</td></tr>
+        <tr><th scope="row">Dec 2025</th><td>Opinion-paper format and prioritized list.</td></tr>
+        <tr><th scope="row">Feb to May 2026</th><td>Research Modules feedback and user stories delivered.</td></tr>
+        <tr><th scope="row">Jul to Aug 2026</th><td>Voting on opinion papers.</td></tr>
+        <tr><th scope="row">Oct to Nov 2026</th><td>Review of the user-testing draft (current).</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="glossary">
+  <h2><span class="secno">4.</span>Glossary</h2>
+  <dl>
+    <dt>COGA</dt><dd>Cognitive and Learning Disabilities Accessibility.</dd>
+    <dt>Task Force (TF)</dt><dd>The official W3C group that writes COGA guidance. Co-chairs include Lisa and, since 2026, Julie.</dd>
+    <dt>Community Group (CG)</dt><dd>This group: open, informal, gives feedback.</dd>
+    <dt>Content Usable</dt><dd>The main COGA guidance document, with objectives, patterns and user stories.</dd>
+    <dt>Research Modules</dt><dd>Task Force papers on specific topics, published as a W3C draft note in February 2026.</dd>
+    <dt>Functional needs</dt><dd>Describing what a person needs (memory, attention and so on) rather than a diagnosis. This is the WCAG 3 approach.</dd>
+    <dt>Opinion paper</dt><dd>A one-page argument about a gap, with research and a real story.</dd>
+    <dt>User story</dt><dd>Your experience written in your own words. The leads turn it into formal user needs.</dd>
+    <dt>AP</dt><dd>Action point: a task with a named owner.</dd>
+    <dt>AG</dt><dd>Accessibility Guidelines Working Group, which develops WCAG.</dd>
+    <dt>TPAC and CSUN</dt><dd>The annual W3C conference and a large accessibility conference.</dd>
+  </dl>
+</section>
+
+<section id="first-month">
+  <h2><span class="secno">5.</span>Your first month</h2>
+  <ol>
+    <li>Join Discord and subscribe to the shared calendar (links on the Home tab).</li>
+    <li>Read this guide, then the latest sub-tab in '26 Meeting Notes.</li>
+    <li>Add 👍 votes in the Voting Area for topics that matter to you.</li>
+    <li>Write one user story about a barrier you hit online. Any format works: text, bullets, voice note.</li>
+    <li>Optional: fill in an intro slide, or pick an open opinion paper to help with.</li>
+  </ol>
+</section>
+<section class="view-return" aria-labelledby="simple-return-title">
+  <h2 id="simple-return-title">Prefer a shorter guide?</h2>
+  <p>The simple view focuses on your first steps and the notes to read first.</p>
+  <button class="pill" type="button" id="openSimple">Open the simple view</button>
+</section>
+</main>
+
+<footer>
+  <div class="contribute">
+    <p><strong>Help improve this guide.</strong> <a href="https://github.com/mugiwarafx/coga-cg-welcome/edit/main/index.html">Suggest a change on GitHub</a> and open a pull request.</p>
+    <p><a href="https://github.com/mugiwarafx/coga-cg-welcome">View the source on GitHub</a></p>
+  </div>
+  <p>Unofficial community summary, 12 November 2026. Not endorsed by W3C. Source: COGA Community Meeting Notes (Google Doc).</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var doc=document.getElementById('doc-view'), simple=document.getElementById('simple-view');
+  function setView(v,toTop){
+    var d=v==='doc';
+    doc.hidden=!d; simple.hidden=d;
+    document.getElementById('skip-link').href=d?'#doc-main':'#simple-main';
+    try{localStorage.setItem('coga-view',d?'doc':'simple');}catch(e){}
+    if(toTop){
+      history.replaceState(null,'',location.pathname+location.search);
+      document.getElementById(d?'doc-title':'simple-title').focus({preventScroll:true});
+      window.scrollTo({top:0,behavior:'instant'});
+    }
+  }
+  var root=document.documentElement, themeToggle=document.getElementById('themeToggle');
+  function setMode(m,remember){
+    var dark=m==='dark';
+    if(dark){root.setAttribute('data-mode','dark');}else{root.removeAttribute('data-mode');}
+    themeToggle.setAttribute('aria-checked',dark?'true':'false');
+    themeToggle.title=dark?'Switch to light mode':'Switch to dark mode';
+    document.querySelector('meta[name="theme-color"]').content=dark?'#181818':'#ffffff';
+    if(remember){try{localStorage.setItem('coga-mode',dark?'dark':'light');}catch(e){}}
+  }
+  setMode(root.getAttribute('data-mode')==='dark'?'dark':'light',false);
+  themeToggle.hidden=false;
+  themeToggle.addEventListener('click',function(){setMode(root.getAttribute('data-mode')==='dark'?'light':'dark',true);});
+
+  var view='simple', target=null;
+  try{if(localStorage.getItem('coga-view')==='doc'){view='doc';}}catch(e){}
+  if(location.hash.length>1){
+    target=document.getElementById(location.hash.slice(1));
+    if(target){view=doc.contains(target)?'doc':'simple';}
+  }
+  setView(view,false);
+  if(target){target.scrollIntoView();}
+  window.addEventListener('hashchange',function(){
+    var hashTarget=document.getElementById(location.hash.slice(1));
+    if(hashTarget&&(doc.contains(hashTarget)||simple.contains(hashTarget))){
+      setView(doc.contains(hashTarget)?'doc':'simple',false);
+      hashTarget.scrollIntoView();
+    }
+  });
+  document.getElementById('openDoc').addEventListener('click',function(){setView('doc',true);});
+  document.getElementById('openSimple').addEventListener('click',function(){setView('simple',true);});
+
+  var btn=document.getElementById('shortToggle');
+  function applyShort(on){doc.classList.toggle('short',on);btn.setAttribute('aria-pressed',on?'true':'false');btn.textContent=on?'Show full details':'Show essentials only';}
+  var saved=false;try{saved=localStorage.getItem('coga-short')==='1';}catch(e){}
+  applyShort(saved);
+  btn.addEventListener('click',function(){var on=!doc.classList.contains('short');applyShort(on);try{localStorage.setItem('coga-short',on?'1':'0');}catch(e){}});
+
+  var tt=document.getElementById('toc-toggle');
+  tt.addEventListener('click',function(){
+    var inline=doc.classList.toggle('toc-inline');
+    tt.textContent=inline?'→':'←';
+    tt.setAttribute('aria-label',inline?'Pop out sidebar':'Collapse sidebar');
+    tt.setAttribute('aria-expanded',inline?'false':'true');
+  });
+})();
+</script>
+</body>
+</html>
